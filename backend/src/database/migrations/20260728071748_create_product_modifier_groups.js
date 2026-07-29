@@ -13,9 +13,9 @@ export async function up(knex) {
     table.bigInteger("modifier_group_id").unsigned().notNullable();
 
     // Override Rules
-    table.smallint("min_select_override").unsigned().nullable();
+    table.integer("min_select_override").unsigned().nullable();
 
-    table.smallint("max_select_override").unsigned().nullable();
+    table.integer("max_select_override").unsigned().nullable();
 
     table.boolean("is_required_override").nullable();
 

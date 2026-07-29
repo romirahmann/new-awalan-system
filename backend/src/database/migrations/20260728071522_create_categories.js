@@ -5,7 +5,7 @@
 export async function up(knex) {
   await knex.schema.createTable("categories", (table) => {
     // Primary Key
-    addPrimaryKey(table);
+    table.bigIncrements("id");
 
     // Business
     table.string("name", 100).notNullable();

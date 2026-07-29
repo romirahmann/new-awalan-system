@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "make:migration": "knex migrate:make",
+    "make:seeds": "knex seed:make",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run"

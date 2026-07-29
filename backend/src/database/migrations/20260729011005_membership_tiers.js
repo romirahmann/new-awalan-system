@@ -3,15 +3,16 @@
  * @returns {Promise<void>}
  */
 export async function up(knex) {
-  await knex.schema.createTable("attribute_values", (table) => {
+  await knex.schema.createTable("membership_tiers", (table) => {
     // Primary Key
     table.bigIncrements("id");
 
-    // Foreign Keys
-    table.bigInteger("attribute_id").unsigned().notNullable();
-
     // Business
-    table.string("value", 100).notNullable();
+    table.string("name", 100).notNullable();
+
+    table.integer("min_points_required").unsigned().notNullable().defaultTo(0);
+
+    table.text("benefits_description").nullable();
 
     table.integer("sort_order").unsigned().notNullable().defaultTo(0);
 
@@ -21,18 +22,11 @@ export async function up(knex) {
     table.timestamp("updated_at").nullable();
 
     // Constraints
-    table
-      .foreign("attribute_id", "fk_attribute_values_attribute")
-      .references("id")
-      .inTable("attributes")
-      .onUpdate("CASCADE")
-      .onDelete("RESTRICT");
-
-    table.unique(["attribute_id", "value"]);
+    table.unique(["name"]);
 
     // Index
-    table.index(["attribute_id"]);
     table.index(["sort_order"]);
+    table.index(["min_points_required"]);
   });
 }
 
@@ -41,5 +35,5 @@ export async function up(knex) {
  * @returns {Promise<void>}
  */
 export async function down(knex) {
-  await knex.schema.dropTableIfExists("attribute_values");
+  await knex.schema.dropTableIfExists("membership_tiers");
 }
