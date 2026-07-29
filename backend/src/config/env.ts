@@ -13,6 +13,7 @@ const envSchema = z.object({
   APP_HOST: z.string(),
   APP_NAME: z.string(),
   APP_PORT: z.coerce.number(),
+  JWT_SECRET: z.string().min(10),
 });
 
 const parsed = envSchema.safeParse(process.env);
