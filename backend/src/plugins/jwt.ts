@@ -7,5 +7,10 @@ import { env } from "../config/env.js";
 export default fp(async function (fastify: FastifyInstance) {
   await fastify.register(fastifyJwt, {
     secret: env.JWT_SECRET,
+
+    cookie: {
+      cookieName: "access_token",
+      signed: false,
+    },
   });
 });

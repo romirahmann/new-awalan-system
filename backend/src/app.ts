@@ -6,6 +6,7 @@ import fastifyCors from "@fastify/cors";
 import helmetPlugin from "./plugins/helmet.js";
 import databasePlugin from "./plugins/database.js";
 import jwtPlugin from "./plugins/jwt.js";
+import cookiePlugin from "./plugins/cookie.plugin.js";
 
 const app = Fastify({
   logger: true,
@@ -17,6 +18,7 @@ app.register(fastifyCors, {
 
 app.register(helmetPlugin);
 app.register(databasePlugin);
+app.register(cookiePlugin);
 app.register(jwtPlugin);
 
 app.register(routes);
